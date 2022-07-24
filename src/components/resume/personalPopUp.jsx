@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 const PersonalPopUp = (props) => {
+  const [personalInputValues, setpersonalInputValues] = useState();
+  const handlePersonalInputs = (e) => {
+    setpersonalInputValues({
+      ...personalInputValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+  console.log(personalInputValues, "inp Val");
   return (
     <div className="popup-box">
       <div className="box">
@@ -15,6 +23,8 @@ const PersonalPopUp = (props) => {
                   class="form-control"
                   id="floatingInput"
                   placeholder="Your Name"
+                  name="userName"
+                  onChange={handlePersonalInputs}
                 />
                 <label for="floatingInput">Your Name</label>
               </div>
@@ -26,6 +36,8 @@ const PersonalPopUp = (props) => {
                   class="form-control"
                   id="floatingInput"
                   placeholder="Your Age"
+                  name="userAge"
+                  onChange={handlePersonalInputs}
                 />
                 <label for="floatingInput">Age In Years</label>
               </div>
@@ -39,6 +51,8 @@ const PersonalPopUp = (props) => {
                   class="form-control"
                   id="floatingInput"
                   placeholder="Your Country"
+                  name="userCountry"
+                  onChange={handlePersonalInputs}
                 />
                 <label for="floatingInput">Country</label>
               </div>
@@ -50,6 +64,8 @@ const PersonalPopUp = (props) => {
                   class="form-control"
                   id="floatingInput"
                   placeholder="Your State / City Name"
+                  name="userCity"
+                  onChange={handlePersonalInputs}
                 />
                 <label for="floatingInput">State/City Name</label>
               </div>
@@ -65,6 +81,8 @@ const PersonalPopUp = (props) => {
                   class="form-control"
                   id="floatingInput"
                   placeholder="Your Job Title"
+                  name="userJob"
+                  onChange={handlePersonalInputs}
                 />
                 <label for="floatingInput">Current Job Title</label>
               </div>
@@ -75,6 +93,8 @@ const PersonalPopUp = (props) => {
                   class="form-select"
                   id="floatingSelect"
                   aria-label="Floating label select example"
+                  name="userExperience"
+                  onChange={handlePersonalInputs}
                 >
                   <option selected value="1">
                     1 or Less Than 01 Year
@@ -88,8 +108,10 @@ const PersonalPopUp = (props) => {
               </div>
             </div>
           </div>
-          <div className="row">
-            <button type="submit">Submit</button>
+          <div className="row mt-3 mx-auto text-center submit-div">
+            <button type="submit" className="submit__personal-info">
+              Submit
+            </button>
           </div>
         </div>
       </div>
