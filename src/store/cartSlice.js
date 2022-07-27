@@ -10,9 +10,6 @@ const cartSlice = createSlice({
     data: [],
     status: STATUSES.IDLE,
   },
-  reducers: (builder) => {
-    builder.addCase;
-  },
 });
 export const { add, remove } = cartSlice.actions;
 export default cartSlice.reducer;
