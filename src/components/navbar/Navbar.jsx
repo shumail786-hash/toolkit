@@ -22,7 +22,8 @@ const Navbar = () => {
               width: "100px",
             }}
           />
-          &nbsp; Generate your Own CV for FREE!...
+          &nbsp;{" "}
+          <span className="cvHeading">Generate your Own CV for FREE!...</span>
         </a>
       </div>
     </nav>
