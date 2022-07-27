@@ -1,14 +1,48 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const PersonalPopUp = (props) => {
-  const [personalInputValues, setpersonalInputValues] = useState();
+  const [data, setData] = useState([]);
+  const [personalInputValues, setpersonalInputValues] = useState({
+    userName: "",
+    userAge: "",
+    userCountry: "",
+    userCity: "",
+    userJob: "",
+    userExperience: "",
+  });
   const handlePersonalInputs = (e) => {
-    setpersonalInputValues({
-      ...personalInputValues,
-      [e.target.name]: e.target.value,
+    const { value, name } = e.target;
+    setpersonalInputValues(() => {
+      return {
+        ...personalInputValues,
+        [name]: value,
+      };
     });
   };
-  console.log(personalInputValues, "inp Val");
+  console.log(personalInputValues);
+  const submitPersonalInfo = () => {
+    const { userName, userJob, userCountry, userCity } = personalInputValues;
+    if (userName === "") {
+      toast.error("Name Field is Required");
+    } else if (userJob === "") {
+      toast.error("Job Title is Required");
+    } else if (userCountry === "") {
+      toast.error("Country is Required");
+    } else if (userCity === "") {
+      toast.error("City/State is Required");
+    } else {
+      toast.success("Data Added Successfully");
+      localStorage.setItem(
+        "personalData",
+        JSON.stringify([...data, personalInputValues])
+      );
+      {
+        props.handleClose();
+      }
+    }
+  };
+
   return (
     <div className="popup-box">
       <div className="box">
@@ -96,20 +130,25 @@ const PersonalPopUp = (props) => {
                   name="userExperience"
                   onChange={handlePersonalInputs}
                 >
-                  <option selected value="1">
+                  <option selected>Add Experience</option>
+                  <option value="1 or Less than 1 Year">
                     1 or Less Than 01 Year
                   </option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
-                  <option value="5">5+</option>
+                  <option value="5+">5+</option>
                 </select>
                 <label for="floatingSelect">Experience In Years</label>
               </div>
             </div>
           </div>
           <div className="row mt-3 mx-auto text-center submit-div">
-            <button type="submit" className="submit__personal-info">
+            <button
+              type="submit"
+              className="submit__personal-info"
+              onClick={submitPersonalInfo}
+            >
               Submit
             </button>
           </div>
