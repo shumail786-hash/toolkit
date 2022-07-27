@@ -47,25 +47,32 @@ const Resume = () => {
                 <BiEditAlt /> Edit Personal Info.
               </button>
             </div>
-            <p className="mx-auto text-center app__userName-title">
-              <b>Muhammad Shumail Mushtaq</b>
+            {localStorage.getItem("prsonalData") ? (
+              <></>
+            ) : (
+              <>
+                <p className="mx-auto text-center app__userName-title">
+                  <b>Muhammad Shumail Mushtaq</b>
 
-              <p className="app__job-title">
-                <i>21 Years</i>
-                <p>Lahore, Pakistan</p>
-              </p>
-            </p>
-            <p
-              className="mx-auto text-center fs-5"
-              style={{
-                opacity: 0.9,
-              }}
-            >
-              <b>React JS Developer</b>
-              <p className="app__user-experience">
-                <i>LESS THAN 1 YEAR EXPERIENCE</i>
-              </p>
-            </p>
+                  <p className="app__job-title">
+                    <i>21 Years</i>
+                    <p>Lahore, Pakistan</p>
+                  </p>
+                </p>
+                <p
+                  className="mx-auto text-center fs-5"
+                  style={{
+                    opacity: 0.9,
+                  }}
+                >
+                  <b>React JS Developer</b>
+                  <p className="app__user-experience">
+                    <i>LESS THAN 1 YEAR EXPERIENCE</i>
+                  </p>
+                </p>
+              </>
+            )}
+
             <div className="mx-auto text-center app__education-btn">
               <TbSchool />
               &nbsp;

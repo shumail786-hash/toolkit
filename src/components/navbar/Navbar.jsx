@@ -1,7 +1,6 @@
 import React from "react";
 import { images } from "../../constants";
 import "./navbar.css";
-import { GiHamburgerMenu } from "react-icons/gi";
 const Navbar = () => {
   return (
     <nav
@@ -13,7 +12,7 @@ const Navbar = () => {
       }}
     >
       <div className="container-fluid">
-        <a className="navbar-brand" href="#Home">
+        <a className="navbar-brand mx-auto text-center" href="/">
           <img
             src={images.logo}
             alt="logo"
@@ -23,42 +22,8 @@ const Navbar = () => {
               width: "100px",
             }}
           />
+          &nbsp; Generate your Own CV for FREE!...
         </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          style={{
-            boxShadow: "none",
-          }}
-        >
-          <GiHamburgerMenu />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul
-            className="navbar-nav mb-2 mb-lg-0"
-            style={{
-              position: "relative",
-              left: "50%",
-            }}
-          >
-            {["Build", "About", "Portfolio", "Contact"].map((item, index) => (
-              <li key={index} className="nav-item">
-                <a
-                  href={`#${item}`}
-                  className="nav-link active"
-                  aria-current="page"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </nav>
   );

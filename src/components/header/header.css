@@ -34,10 +34,10 @@
   overflow: hidden;
   font-family: French Script MT;
   font-size: 5rem;
-  animation: animate 2s linear alternate-reverse infinite;
+  animation: buildCV 2s linear alternate-reverse infinite;
 }
 
-@keyframes animate {
+@keyframes buildCV {
   0% {
     width: 0ch;
     color: greenyellow;
@@ -99,4 +99,12 @@
 }
 .btn__generate-cv:hover .link-generate-cv {
   color: honeydew !important;
+}
+@media screen and (max-width: 550px) {
+  .main-flex {
+    width: 85%;
+  }
+  .main-head > h1 {
+    font-size: 36px;
+  }
 }

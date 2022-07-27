@@ -1,16 +1,17 @@
-const { createSlice } = require("@reduxjs/toolkit");
-
-const initialState = [];
+const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
+export const STATUSES = Object.freeze({
+  IDLE: "idle",
+  ERROR: "error",
+  LOADING: "loading",
+});
 const cartSlice = createSlice({
-  name: "cart",
-  initialState,
-  reducers: {
-    add(state, action) {
-      state.push(action.payload);
-    },
-    remove(state, action) {
-      return state.filter((item) => item.id !== action.payload);
-    },
+  name: "personalInfo",
+  initialState: {
+    data: [],
+    status: STATUSES.IDLE,
+  },
+  reducers: (builder) => {
+    builder.addCase;
   },
 });
 export const { add, remove } = cartSlice.actions;

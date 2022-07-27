@@ -94,7 +94,7 @@ input[type="file"] {
 }
 .box {
   position: relative;
-  width: 80%;
+  width: 70%;
   min-height: auto;
   background-color: whitesmoke;
   border-top: 4px solid navy;
@@ -113,13 +113,30 @@ input[type="file"] {
     top: 0%;
   }
 }
+@media screen and (max-width: 767px) {
+  .box {
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    width: 86%;
+    animation: animate 0.3s normal;
+    top: -8%;
+  }
+  @keyframes animate {
+    0% {
+      top: 0%;
+    }
+    100% {
+      top: -8%;
+    }
+  }
+}
 .btn-close {
   cursor: pointer;
   background-color: #fff;
   border-radius: 50%;
   position: fixed;
-  right: calc(27% - 10px);
-  top: 35px;
+  right: calc(10% - 20px);
+  top: 15px;
   box-shadow: none;
   font-size: 10px;
 }
