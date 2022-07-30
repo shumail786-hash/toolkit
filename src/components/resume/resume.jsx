@@ -5,14 +5,31 @@ import { MdChangeCircle } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
 import { TbSchool } from "react-icons/tb";
 import { BsGear } from "react-icons/bs";
-
+import InterestPopUp from "./interestPopup";
 const Resume = () => {
   const [isOpen, setisOpen] = useState(false);
+  const [isEducationOpen, setisEducationOpen] = useState(false);
+  const [isInterestOpen, setisInterestOpen] = useState(false);
 
+  const getPersonalInfoData = () => {
+    const data = localStorage.getItem("personalData");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return [];
+    }
+  };
+  const [personalUserData, setPersonalUserData] = useState(
+    getPersonalInfoData()
+  );
   // Closing Personal PopUp
 
   const togglePopUp = () => {
     setisOpen(!isOpen);
+    setisEducationOpen(!isEducationOpen);
+  };
+  const toggleInterestPopUp = () => {
+    setisInterestOpen(!isInterestOpen);
   };
   return (
     <div className="app__resume">
@@ -47,8 +64,34 @@ const Resume = () => {
                 <BiEditAlt /> Edit Personal Info.
               </button>
             </div>
-            {localStorage.getItem("prsonalData") ? (
-              <></>
+            {personalUserData ? (
+              <>
+                {personalUserData.map((element, index) => (
+                  <div key={index}>
+                    <p className="mx-auto text-center app__userName-title">
+                      <b>{element.userName}</b>
+
+                      <p className="app__job-title">
+                        <i>{element.userAge} Years</i>
+                        <p>
+                          {element.userCity}, {element.userCountry}
+                        </p>
+                      </p>
+                    </p>
+                    <p
+                      className="mx-auto text-center fs-5"
+                      style={{
+                        opacity: 0.9,
+                      }}
+                    >
+                      <b>{element.userJob}</b>
+                      <p className="app__user-experience">
+                        <i>{element.userExperience}</i>
+                      </p>
+                    </p>
+                  </div>
+                ))}
+              </>
             ) : (
               <>
                 <p className="mx-auto text-center app__userName-title">
@@ -98,7 +141,12 @@ const Resume = () => {
               &nbsp;
               <i>Your Interest</i>
               <span className="app__personal-edit app__education-edit mx-auto text-center">
+                {isInterestOpen && (
+                  <InterestPopUp handleClose={toggleInterestPopUp} />
+                )}
+
                 <button
+                  onClick={toggleInterestPopUp}
                   style={{
                     border: "none",
                     outline: "none",

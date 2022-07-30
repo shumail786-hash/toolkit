@@ -20,7 +20,6 @@ const PersonalPopUp = (props) => {
       };
     });
   };
-  console.log(personalInputValues);
   const submitPersonalInfo = () => {
     const { userName, userJob, userCountry, userCity } = personalInputValues;
     if (userName === "") {
@@ -37,9 +36,7 @@ const PersonalPopUp = (props) => {
         "personalData",
         JSON.stringify([...data, personalInputValues])
       );
-      {
-        props.handleClose();
-      }
+      props.handleClose();
     }
   };
 
@@ -134,10 +131,10 @@ const PersonalPopUp = (props) => {
                   <option value="1 or Less than 1 Year">
                     1 or Less Than 01 Year
                   </option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5+">5+</option>
+                  <option value="2 Years of Experience">2</option>
+                  <option value="3 Years of Experience">3</option>
+                  <option value="4 Years of Experience">4</option>
+                  <option value="5 or 5+ Years of Experience">5+</option>
                 </select>
                 <label for="floatingSelect">Experience In Years</label>
               </div>
