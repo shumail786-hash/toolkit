@@ -1,17 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./resume.css";
-import PersonalPopUp from "./personalPopUp";
-import { MdChangeCircle } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
 import { TbSchool } from "react-icons/tb";
 import { BsGear } from "react-icons/bs";
-import InterestPopUp from "./interestPopup";
 import { Link } from "react-router-dom";
 const Resume = () => {
-  const [isOpen, setisOpen] = useState(false);
-  const [isEducationOpen, setisEducationOpen] = useState(false);
-  const [isInterestOpen, setisInterestOpen] = useState(false);
-
+  const [avatar, setAvatar] = useState("");
   const getPersonalInfoData = () => {
     const data = localStorage.getItem("personalData");
     if (data) {
@@ -37,13 +31,23 @@ const Resume = () => {
 
   // Closing Personal PopUp
 
-  const togglePopUp = () => {
-    setisOpen(!isOpen);
-    setisEducationOpen(!isEducationOpen);
-  };
-  const toggleInterestPopUp = () => {
-    setisInterestOpen(!isInterestOpen);
-  };
+  // const togglePopUp = () => {
+  //   setisOpen(!isOpen);
+  //   setisEducationOpen(!isEducationOpen);}
+
+  function getAvatar() {
+    const data = localStorage.getItem("avatar");
+    // console.log(data);
+    if (data) {
+      return setAvatar(data);
+    } else {
+      return [];
+    }
+  }
+  useEffect(() => {
+    getAvatar();
+  }, []);
+
   return (
     <div className="app__resume">
       <div
@@ -55,19 +59,18 @@ const Resume = () => {
         <div className="row mx-auto">
           <div className="col-md peronalInfo">
             <div className="avatarbg">
-              <div className="avatar">
-                <label className="change__avatar-label">
-                  <MdChangeCircle /> Change
-                  <input type="file" name="avatar" />
-                </label>
-              </div>
+              <img className="avatar" src={avatar} alt="avatar" />
             </div>
-            <div className="app__positioned-div"></div>
-            {/* {isOpen && <PersonalPopUp handleClose={togglePopUp} />} */}
+            <div className="text-center mx-auto app__positioned-div">
+              <Link to="/changeAvatar" className="avatarLink">
+                <button className="changeAvatar">Change Avatar</button>
+              </Link>
+            </div>
 
+            {/* <div className="app__positioned-div"></div> */}
+            {/* {isOpen && <PersonalPopUp handleClose={togglePopUp} />} */}
             <div className="app__personal-edit mx-auto text-center">
               <button
-                onClick={togglePopUp}
                 style={{
                   border: "none",
                   outline: "none",
@@ -105,7 +108,6 @@ const Resume = () => {
                   </p>
                 </div>
               ))}
-
             <div className="mx-auto text-center app__education-btn">
               <TbSchool />
               &nbsp;
@@ -136,7 +138,6 @@ const Resume = () => {
                 )} */}
 
                 <button
-                  onClick={toggleInterestPopUp}
                   style={{
                     border: "none",
                     outline: "none",
