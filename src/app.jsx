@@ -7,6 +7,8 @@ import Header from "./components/header/header";
 import Resume from "./components/resume/resume";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PersonalPopUp from "./components/resume/personalPopUp";
+import InterestPopup from "./components/resume/interestPopup";
 const App = () => {
   return (
     <div className="App">
@@ -27,6 +29,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Header />}></Route>
             <Route path="/buildResume" element={<Resume />}></Route>
+            <Route path="/interest" element={<InterestPopup />}></Route>
+            <Route path="/personal" element={<PersonalPopUp />}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>

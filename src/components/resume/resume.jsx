@@ -6,6 +6,7 @@ import { BiEditAlt } from "react-icons/bi";
 import { TbSchool } from "react-icons/tb";
 import { BsGear } from "react-icons/bs";
 import InterestPopUp from "./interestPopup";
+import { Link } from "react-router-dom";
 const Resume = () => {
   const [isOpen, setisOpen] = useState(false);
   const [isEducationOpen, setisEducationOpen] = useState(false);
@@ -22,6 +23,18 @@ const Resume = () => {
   const [personalUserData, setPersonalUserData] = useState(
     getPersonalInfoData()
   );
+
+  const getInterestData = () => {
+    const data = localStorage.getItem("userInterest");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return [];
+    }
+  };
+
+  const [interestUserData, setInterestUserData] = useState(getInterestData());
+
   // Closing Personal PopUp
 
   const togglePopUp = () => {
@@ -50,7 +63,7 @@ const Resume = () => {
               </div>
             </div>
             <div className="app__positioned-div"></div>
-            {isOpen && <PersonalPopUp handleClose={togglePopUp} />}
+            {/* {isOpen && <PersonalPopUp handleClose={togglePopUp} />} */}
 
             <div className="app__personal-edit mx-auto text-center">
               <button
@@ -61,60 +74,37 @@ const Resume = () => {
                   background: "transparent",
                 }}
               >
-                <BiEditAlt /> Edit Personal Info.
+                <Link to="/personal">
+                  <BiEditAlt /> Edit Personal Info.
+                </Link>
               </button>
             </div>
-            {personalUserData ? (
-              <>
-                {personalUserData.map((element, index) => (
-                  <div key={index}>
-                    <p className="mx-auto text-center app__userName-title">
-                      <b>{element.userName}</b>
+            {personalUserData &&
+              personalUserData.map((element, index) => (
+                <div key={index}>
+                  <p className="mx-auto text-center app__userName-title">
+                    <b>{element.userName}</b>
 
-                      <p className="app__job-title">
-                        <i>{element.userAge} Years</i>
-                        <p>
-                          {element.userCity}, {element.userCountry}
-                        </p>
+                    <p className="app__job-title">
+                      <i>{element.userAge} Years</i>
+                      <p>
+                        {element.userCity}, {element.userCountry}
                       </p>
                     </p>
-                    <p
-                      className="mx-auto text-center fs-5"
-                      style={{
-                        opacity: 0.9,
-                      }}
-                    >
-                      <b>{element.userJob}</b>
-                      <p className="app__user-experience">
-                        <i>{element.userExperience}</i>
-                      </p>
+                  </p>
+                  <p
+                    className="mx-auto text-center fs-5"
+                    style={{
+                      opacity: 0.9,
+                    }}
+                  >
+                    <b>{element.userJob}</b>
+                    <p className="app__user-experience">
+                      <i>{element.userExperience}</i>
                     </p>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <>
-                <p className="mx-auto text-center app__userName-title">
-                  <b>Muhammad Shumail Mushtaq</b>
-
-                  <p className="app__job-title">
-                    <i>21 Years</i>
-                    <p>Lahore, Pakistan</p>
                   </p>
-                </p>
-                <p
-                  className="mx-auto text-center fs-5"
-                  style={{
-                    opacity: 0.9,
-                  }}
-                >
-                  <b>React JS Developer</b>
-                  <p className="app__user-experience">
-                    <i>LESS THAN 1 YEAR EXPERIENCE</i>
-                  </p>
-                </p>
-              </>
-            )}
+                </div>
+              ))}
 
             <div className="mx-auto text-center app__education-btn">
               <TbSchool />
@@ -141,9 +131,9 @@ const Resume = () => {
               &nbsp;
               <i>Your Interest</i>
               <span className="app__personal-edit app__education-edit mx-auto text-center">
-                {isInterestOpen && (
+                {/* {isInterestOpen && (
                   <InterestPopUp handleClose={toggleInterestPopUp} />
-                )}
+                )} */}
 
                 <button
                   onClick={toggleInterestPopUp}
@@ -154,9 +144,21 @@ const Resume = () => {
                     fontSize: "17px",
                   }}
                 >
-                  <BiEditAlt /> Edit Interest.
+                  <Link to="/interest">
+                    <BiEditAlt /> Edit Interest.
+                  </Link>
                 </button>
               </span>
+              <ul
+                style={{
+                  color: "black",
+                }}
+              >
+                {interestUserData &&
+                  interestUserData.map((element, index) => (
+                    <li key={index}>{element.interest}</li>
+                  ))}
+              </ul>
             </div>
           </div>
           <div className="col-md peronalInfo">
