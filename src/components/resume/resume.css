@@ -17,11 +17,11 @@
 }
 .avatar {
   position: relative;
-  width: 125px;
-  height: 125px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 2px solid rgb(15, 15, 144);
-  margin-top: 15%;
+  margin-top: 10%;
 }
 .avatar::after {
   position: absolute;
@@ -116,4 +116,26 @@
   background-color: white;
   transition-duration: 0.3s;
   color: navy;
+}
+.addEducation {
+  padding-left: 20px;
+  padding-right: 20px;
+  /* transform: translateY(-50%); */
+  border: none;
+  outline: none;
+  background-color: rgba(6, 137, 181, 0.842);
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  /* width: 220px; */
+}
+.removeBtn {
+  background-color: red;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 12px;
+  border-radius: 12px;
+  transform: translateY(13%);
 }

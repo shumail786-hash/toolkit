@@ -44,6 +44,18 @@ const Resume = () => {
       return [];
     }
   }
+
+  function getEducationData() {
+    const data = localStorage.getItem("education");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return [];
+    }
+  }
+  const [getEducationValues, setgetEducationValues] = useState(
+    getEducationData()
+  );
   useEffect(() => {
     getAvatar();
   }, []);
@@ -59,7 +71,7 @@ const Resume = () => {
         <div className="row mx-auto">
           <div className="col-md peronalInfo">
             <div className="avatarbg">
-              <img className="avatar" src={avatar} alt="avatar" />
+              <img className="avatar" src={avatar} alt="User Image" />
             </div>
             <div className="text-center mx-auto app__positioned-div">
               <Link to="/changeAvatar" className="avatarLink">
@@ -121,12 +133,23 @@ const Resume = () => {
                     fontSize: "17px",
                   }}
                 >
-                  <BiEditAlt /> Edit Education.
+                  <Link to="/addEducation">
+                    <BiEditAlt /> Edit Education.
+                  </Link>
                 </button>
               </span>
-              <h3 className="app__education-lists">
-                ICS | Govt. Islamia College Civil Lines Lahore
-              </h3>
+              {getEducationValues &&
+                getEducationValues.map((element, index) => (
+                  <span key={index}>
+                    <h3 className="app__education-lists">
+                      {element.degreeType} | {element.addEducation}
+                    </h3>
+                    <h3 className="app__education-lists">
+                      Start Date: {element.yearStart} | End Date:{" "}
+                      {element.endYear}
+                    </h3>
+                  </span>
+                ))}
             </div>
             <div className="mx-auto text-center app__education-btn ">
               <BsGear />

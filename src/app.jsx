@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PersonalPopUp from "./components/resume/personalPopUp";
 import InterestPopup from "./components/resume/interestPopup";
 import ChangeAvatar from "./components/resume/changeAvatar";
+import Education from "./components/resume/education";
 const App = () => {
   return (
     <div className="App">
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/interest" element={<InterestPopup />}></Route>
             <Route path="/personal" element={<PersonalPopUp />}></Route>
             <Route path="/changeAvatar" element={<ChangeAvatar />}></Route>
+            <Route path="/addEducation" element={<Education />}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>
