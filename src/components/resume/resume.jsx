@@ -4,6 +4,7 @@ import { BiEditAlt } from "react-icons/bi";
 import { TbSchool } from "react-icons/tb";
 import { BsGear } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { FaPencilAlt } from "react-icons/fa";
 const Resume = () => {
   const [avatar, setAvatar] = useState("");
   const getPersonalInfoData = () => {
@@ -60,6 +61,15 @@ const Resume = () => {
     getAvatar();
   }, []);
 
+  const [getSummaryValues, setgetSummaryValues] = useState(getSummaryData());
+  function getSummaryData() {
+    const data = localStorage.getItem("userSummary");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return null;
+    }
+  }
   return (
     <div className="app__resume">
       <div
@@ -75,7 +85,7 @@ const Resume = () => {
             </div>
             <div className="text-center mx-auto app__positioned-div">
               <Link to="/changeAvatar" className="avatarLink">
-                <button className="changeAvatar">Change Avatar</button>
+                <button className="changeAvatar mt-4">Change Avatar</button>
               </Link>
             </div>
 
@@ -186,13 +196,42 @@ const Resume = () => {
             </div>
           </div>
           <div className="col-md peronalInfo">
-            <div className="avatarbg">
-              <div className="avatar"></div>
-            </div>
-          </div>
-          <div className="col-md peronalInfo">
-            <div className="avatarbg">
-              <div className="avatar"></div>
+            <div className="row">
+              <div className="col-12 mt-3 mb-2">
+                <button
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    background: "transparent",
+                    fontSize: "18px",
+                    fontFamily: "serif",
+                  }}
+                >
+                  <Link to="/addSummary">
+                    <FaPencilAlt /> Add Summary.
+                  </Link>
+                </button>
+              </div>
+              <div className="col-12">
+                {getSummaryValues ? (
+                  getSummaryValues.map((element, index) => (
+                    <>
+                      <p
+                        style={{
+                          fontFamily: "calibri",
+                        }}
+                      >
+                        {element.summary}
+                      </p>
+                      <hr />
+                    </>
+                  ))
+                ) : (
+                  <>
+                    <h3>Add summary regarding to your work. </h3>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
