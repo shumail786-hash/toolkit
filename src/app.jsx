@@ -12,6 +12,7 @@ import InterestPopup from "./components/resume/interestPopup";
 import ChangeAvatar from "./components/resume/changeAvatar";
 import Education from "./components/resume/education";
 import AddSummary from "./components/resume/addSummary";
+import AddWorkExperience from "./components/resume/addWorkExperience";
 const App = () => {
   return (
     <div className="App">
@@ -37,6 +38,10 @@ const App = () => {
             <Route path="/changeAvatar" element={<ChangeAvatar />}></Route>
             <Route path="/addEducation" element={<Education />}></Route>
             <Route path="/addSummary" element={<AddSummary />}></Route>
+            <Route
+              path="/addWorkExperience"
+              element={<AddWorkExperience />}
+            ></Route>
           </Routes>
         </BrowserRouter>
       </Provider>

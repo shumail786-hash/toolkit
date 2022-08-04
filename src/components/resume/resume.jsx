@@ -5,6 +5,7 @@ import { TbSchool } from "react-icons/tb";
 import { BsGear } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
+import { HiOutlineAcademicCap } from "react-icons/hi";
 const Resume = () => {
   const [avatar, setAvatar] = useState("");
   const getPersonalInfoData = () => {
@@ -70,6 +71,16 @@ const Resume = () => {
       return null;
     }
   }
+
+  const [getExperienceValues, setgetExperience] = useState(getExperienceData());
+  function getExperienceData() {
+    const data = localStorage.getItem("experience");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return null;
+    }
+  }
   return (
     <div className="app__resume">
       <div
@@ -81,7 +92,7 @@ const Resume = () => {
         <div className="row mx-auto">
           <div className="col-md peronalInfo">
             <div className="avatarbg">
-              <img className="avatar" src={avatar} alt="User Image" />
+              <img className="avatar" src={avatar} alt="profile" />
             </div>
             <div className="text-center mx-auto app__positioned-div">
               <Link to="/changeAvatar" className="avatarLink">
@@ -106,9 +117,11 @@ const Resume = () => {
             </div>
             {personalUserData &&
               personalUserData.map((element, index) => (
-                <div key={index}>
-                  <p className="mx-auto text-center app__userName-title">
-                    <b>{element.userName}</b>
+                <div key={element.userAge + index}>
+                  <span className="mx-auto text-center">
+                    <p className="app__userName-title">
+                      <b>{element.userName}</b>
+                    </p>
 
                     <p className="app__job-title">
                       <i>{element.userAge} Years</i>
@@ -116,7 +129,7 @@ const Resume = () => {
                         {element.userCity}, {element.userCountry}
                       </p>
                     </p>
-                  </p>
+                  </span>
                   <p
                     className="mx-auto text-center fs-5"
                     style={{
@@ -229,9 +242,62 @@ const Resume = () => {
                 ) : (
                   <>
                     <h3>Add summary regarding to your work. </h3>
+                    <hr />
                   </>
                 )}
               </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <button
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    background: "transparent",
+                    fontSize: "18px",
+                    fontFamily: "serif",
+                  }}
+                >
+                  <Link to="/addWorkExperience">
+                    <HiOutlineAcademicCap /> Add Education.
+                  </Link>
+                </button>
+              </div>
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr. #</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Job Title</th>
+                    <th scope="col">Total Experience</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {getExperienceValues ? (
+                    getExperienceValues.map((element, index) => (
+                      <>
+                        <tr>
+                          <th scope="row">{index + 1}</th>
+                          <td>{element.companyName}</td>
+                          <td>{element.jobTitle}</td>
+                          <td>{element.totalYears}</td>
+                        </tr>
+                      </>
+                    ))
+                  ) : (
+                    <>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Microsoft</td>
+                        <td>Software Enginner</td>
+                        <td>2</td>
+                      </tr>
+                    </>
+                  )}
+                </tbody>
+              </table>
+              <hr />
             </div>
           </div>
         </div>
