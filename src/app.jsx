@@ -13,6 +13,7 @@ import ChangeAvatar from "./components/resume/changeAvatar";
 import Education from "./components/resume/education";
 import AddSummary from "./components/resume/addSummary";
 import AddWorkExperience from "./components/resume/addWorkExperience";
+import AddContact from "./components/resume/addContact";
 const App = () => {
   return (
     <div className="App">
@@ -42,6 +43,7 @@ const App = () => {
               path="/addWorkExperience"
               element={<AddWorkExperience />}
             ></Route>
+            <Route path="/addContact" element={<AddContact />}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>

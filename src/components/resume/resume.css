@@ -139,3 +139,11 @@
   border-radius: 12px;
   transform: translateY(13%);
 }
+.experienceTr {
+  font-size: 13px;
+  font-family: calibri;
+}
+.tableHeadings {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}

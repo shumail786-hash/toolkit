@@ -81,6 +81,19 @@ const Resume = () => {
       return null;
     }
   }
+
+  const [getContactInfoValue, setgetContactInfoValue] = useState(
+    getContactData()
+  );
+
+  function getContactData() {
+    const data = localStorage.getItem("contactInfo");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return null;
+    }
+  }
   return (
     <div className="app__resume">
       <div
@@ -157,7 +170,7 @@ const Resume = () => {
                   }}
                 >
                   <Link to="/addEducation">
-                    <BiEditAlt /> Edit Education.
+                    <BiEditAlt /> Add Education.
                   </Link>
                 </button>
               </span>
@@ -192,7 +205,7 @@ const Resume = () => {
                   }}
                 >
                   <Link to="/interest">
-                    <BiEditAlt /> Edit Interest.
+                    <BiEditAlt /> Add Interest.
                   </Link>
                 </button>
               </span>
@@ -259,17 +272,17 @@ const Resume = () => {
                   }}
                 >
                   <Link to="/addWorkExperience">
-                    <HiOutlineAcademicCap /> Add Education.
+                    <HiOutlineAcademicCap /> Add Experience.
                   </Link>
                 </button>
               </div>
               <table className="table table-striped">
                 <thead>
-                  <tr>
-                    <th scope="col">Sr. #</th>
+                  <tr className="tableHeadings">
+                    <th scope="col">#</th>
                     <th scope="col">Company Name</th>
                     <th scope="col">Job Title</th>
-                    <th scope="col">Total Experience</th>
+                    <th scope="col">Experience</th>
                   </tr>
                 </thead>
 
@@ -278,10 +291,21 @@ const Resume = () => {
                     getExperienceValues.map((element, index) => (
                       <>
                         <tr>
-                          <th scope="row">{index + 1}</th>
-                          <td>{element.companyName}</td>
-                          <td>{element.jobTitle}</td>
-                          <td>{element.totalYears}</td>
+                          <th className="experienceTr" scope="row">
+                            {index + 1}
+                          </th>
+                          <td className="experienceTr">
+                            {element.companyName}
+                          </td>
+                          <td className="experienceTr">{element.jobTitle}</td>
+                          <td className="experienceTr">
+                            {element.totalYears < 1 && (
+                              <>{element.totalYears} Months of Experience</>
+                            )}
+                            {element.totalYears >= 1 && (
+                              <>{element.totalYears} Years of Experience</>
+                            )}
+                          </td>
                         </tr>
                       </>
                     ))
@@ -289,15 +313,70 @@ const Resume = () => {
                     <>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Microsoft</td>
-                        <td>Software Enginner</td>
-                        <td>2</td>
+                        <td className="experienceTr">Microsoft</td>
+                        <td className="experienceTr">Software Enginner</td>
+                        <td className="experienceTr">2</td>
                       </tr>
                     </>
                   )}
                 </tbody>
               </table>
               <hr />
+              <div className="row">
+                <div className="col-12">
+                  <button
+                    style={{
+                      border: "none",
+                      outline: "none",
+                      background: "transparent",
+                      fontSize: "18px",
+                      fontFamily: "serif",
+                    }}
+                  >
+                    <Link to="/addContact">
+                      <HiOutlineAcademicCap /> Add Contact Info.
+                    </Link>
+                  </button>
+                </div>
+
+                <table className="table table-striped">
+                  <thead>
+                    <tr className="tableHeadings">
+                      <th scope="col">#</th>
+                      <th scope="col">User Email</th>
+                      <th scope="col">Contact Number</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {getContactInfoValue ? (
+                      getContactInfoValue.map((element, index) => (
+                        <>
+                          <tr>
+                            <th className="experienceTr" scope="row">
+                              {index + 1}
+                            </th>
+                            <td className="experienceTr">
+                              {element.userEmail}
+                            </td>
+                            <td className="experienceTr">
+                              {element.userPhoneNumber}
+                            </td>
+                          </tr>
+                        </>
+                      ))
+                    ) : (
+                      <>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td className="experienceTr">someone@example.com</td>
+                          <td className="experienceTr">+92 123456789</td>
+                        </tr>
+                      </>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

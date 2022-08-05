@@ -88,7 +88,7 @@ const AddWorkExperience = () => {
             <div className="col-sm-12 col-md-6 col-lg-3 mx-auto">
               <div class="form-floating mb-3">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   id="floatingInput"
                   placeholder="Your Interest"
