@@ -143,6 +143,9 @@
   font-size: 13px;
   font-family: calibri;
 }
+.experienceTr > a {
+  color: black;
+}
 .tableHeadings {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;

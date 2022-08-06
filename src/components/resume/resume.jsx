@@ -5,7 +5,11 @@ import { TbSchool } from "react-icons/tb";
 import { BsGear } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
+import { AiOutlineMail } from "react-icons/ai";
 import { HiOutlineAcademicCap } from "react-icons/hi";
+import { AiOutlineMobile } from "react-icons/ai";
+import { FaLinkedin } from "react-icons/fa";
+import { AiFillGithub } from "react-icons/ai";
 const Resume = () => {
   const [avatar, setAvatar] = useState("");
   const getPersonalInfoData = () => {
@@ -338,44 +342,70 @@ const Resume = () => {
                     </Link>
                   </button>
                 </div>
-
-                <table className="table table-striped">
-                  <thead>
-                    <tr className="tableHeadings">
-                      <th scope="col">#</th>
-                      <th scope="col">User Email</th>
-                      <th scope="col">Contact Number</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {getContactInfoValue ? (
-                      getContactInfoValue.map((element, index) => (
-                        <>
-                          <tr>
-                            <th className="experienceTr" scope="row">
-                              {index + 1}
-                            </th>
-                            <td className="experienceTr">
-                              {element.userEmail}
-                            </td>
-                            <td className="experienceTr">
-                              {element.userPhoneNumber}
-                            </td>
-                          </tr>
-                        </>
-                      ))
-                    ) : (
-                      <>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td className="experienceTr">someone@example.com</td>
-                          <td className="experienceTr">+92 123456789</td>
-                        </tr>
-                      </>
-                    )}
-                  </tbody>
-                </table>
+                {getContactInfoValue ? (
+                  getContactInfoValue.map((element, index) => (
+                    <>
+                      <span className="row">
+                        <div className="col-md experienceTr">
+                          <AiOutlineMail />{" "}
+                          <a href={"mailto:" + element.userEmail}>
+                            {element.userEmail}{" "}
+                          </a>
+                        </div>
+                        <div className="col-md experienceTr">
+                          <AiOutlineMobile />{" "}
+                          <a href={"tel:" + element.userPhoneNumber}>
+                            {element.userPhoneNumber}
+                          </a>
+                        </div>
+                      </span>
+                      <span className="row">
+                        {element.userLinkedIn === "" ? (
+                          <>
+                            {element.userGithub === "" ? (
+                              <span></span>
+                            ) : (
+                              <div className="col-md experienceTr">
+                                <AiFillGithub />{" "}
+                                <a href={element.userGithub}>Github</a>
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <div className="col-md experienceTr">
+                              <FaLinkedin />{" "}
+                              <a href={element.userLinkedIn}>LinkedIn</a>
+                            </div>
+                            <div className="col-md experienceTr">
+                              <AiFillGithub />{" "}
+                              <a href={element.userGithub}>Github</a>
+                            </div>
+                          </>
+                        )}
+                      </span>
+                    </>
+                  ))
+                ) : (
+                  <>
+                    <div className="row">
+                      <div className="col-md experienceTr">
+                        <AiOutlineMail /> someone@example.com
+                      </div>
+                      <div className="col-md experienceTr">
+                        <AiOutlineMobile /> +92 1234567789
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md experienceTr">
+                        <FaLinkedin /> LinkedIn URL
+                      </div>
+                      <div className="col-md experienceTr">
+                        <AiFillGithub /> Github URL
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

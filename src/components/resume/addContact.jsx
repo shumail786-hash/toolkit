@@ -9,6 +9,8 @@ const AddContact = () => {
     userLinkedIn: "",
     userGithub: "",
   });
+  const [isValid, setIsValid] = useState(false);
+  const [isGitValid, setIsGitValid] = useState(false);
   const handlePersonalInputs = (e) => {
     const { value, name } = e.target;
     setAddContact(() => {
@@ -18,22 +20,48 @@ const AddContact = () => {
       };
     });
   };
+  const validateUrl = (userLinkedIn) => {
+    const regEx =
+      /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+    return regEx.test(userLinkedIn);
+  };
+  const validateGitUrl = (userGithub) => {
+    const regEx =
+      /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+    return regEx.test(userGithub);
+  };
   const submitPersonalInfo = () => {
-    const { userEmail, userPhoneNumber, userLinkedIn } = addContactInfo;
+    const { userEmail, userPhoneNumber, userLinkedIn, userGithub } =
+      addContactInfo;
+    const isValid = validateUrl(userLinkedIn);
+    const isGitValid = validateGitUrl(userGithub);
     if (userEmail === "") {
       toast.error("Email is Required");
-    } else if (userPhoneNumber === "") {
+    }
+    if (userPhoneNumber === "") {
       toast.error("Phone Nymber is Required");
+    }
+    if (userLinkedIn === "") {
+      localStorage.setItem("contactInfo", JSON.stringify([addContactInfo]));
+      navigate("/buildResume");
+    }
+    if (!isValid) {
+      toast.warn("LinkedIn URL is Incorrect");
+    }
+    if (userGithub === "") {
+      localStorage.setItem("contactInfo", JSON.stringify([addContactInfo]));
+      navigate("/buildResume");
+    }
+    if (!isGitValid) {
+      toast.warn("GitHub URL is Incorrect");
     } else {
+      setIsValid(isValid);
+      setIsGitValid(isGitValid);
       toast.success("Data Added Successfully");
       localStorage.setItem("contactInfo", JSON.stringify([addContactInfo]));
       navigate("/buildResume");
     }
   };
-  // const validateUrl = (url)=>
-  // {
-  //   const regEx = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.)))/
-  // }
   return (
     <div className="container mt-3">
       <h2>Contact Information</h2>
