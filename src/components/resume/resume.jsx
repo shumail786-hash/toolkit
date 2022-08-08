@@ -98,6 +98,16 @@ const Resume = () => {
       return null;
     }
   }
+  const [getProjectValues, setgetProjectValues] = useState(getProjectData());
+  function getProjectData() {
+    const data = localStorage.getItem("projects");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return null;
+    }
+  }
+
   return (
     <div className="app__resume">
       <div
@@ -360,28 +370,19 @@ const Resume = () => {
                         </div>
                       </span>
                       <span className="row">
-                        {element.userLinkedIn === "" ? (
-                          <>
-                            {element.userGithub === "" ? (
-                              <span></span>
-                            ) : (
-                              <div className="col-md experienceTr">
-                                <AiFillGithub />{" "}
-                                <a href={element.userGithub}>Github</a>
-                              </div>
-                            )}
-                          </>
-                        ) : (
+                        {element.userLinkedIn !== "" && (
                           <>
                             <div className="col-md experienceTr">
                               <FaLinkedin />{" "}
                               <a href={element.userLinkedIn}>LinkedIn</a>
                             </div>
-                            <div className="col-md experienceTr">
-                              <AiFillGithub />{" "}
-                              <a href={element.userGithub}>Github</a>
-                            </div>
                           </>
+                        )}
+                        {element.userGithub !== "" && (
+                          <div className="col-md experienceTr">
+                            <AiFillGithub />{" "}
+                            <a href={element.userGithub}>Github</a>
+                          </div>
                         )}
                       </span>
                     </>
@@ -406,6 +407,78 @@ const Resume = () => {
                     </div>
                   </>
                 )}
+              </div>
+
+              {/* Personal Project Area */}
+              <div className="row">
+                <div className="col-12 mt-3 mb-2">
+                  <button
+                    style={{
+                      border: "none",
+                      outline: "none",
+                      background: "transparent",
+                      fontSize: "18px",
+                      fontFamily: "serif",
+                    }}
+                  >
+                    <Link to="/personalProjects">
+                      <FaPencilAlt /> Add Projects.
+                    </Link>
+                  </button>
+                </div>
+                <div className="col-12">
+                  {getProjectValues ? (
+                    getProjectValues.map((element, index) => (
+                      <div key={index}>
+                        <div className="row">
+                          <div className="col-md experienceTr">
+                            Project Name: {element.projectName}
+                          </div>
+                          {element.clientName !== "" && (
+                            <div className="col-md experienceTr">
+                              Client Name: {element.clientName}
+                            </div>
+                          )}
+                        </div>
+                        {element.projectURL !== "" && (
+                          <div className="row">
+                            <div className="col experienceTr">
+                              Project Link:{" "}
+                              <a
+                                href={element.projectURL}
+                                style={{
+                                  color: "blue",
+                                }}
+                              >
+                                {element.projectURL}
+                              </a>
+                            </div>
+                          </div>
+                        )}
+                        {element.clientCompanyName !== "" && (
+                          <div className="row">
+                            <div className="col-md experienceTr">
+                              Client Name: {element.clientCompanyName}
+                            </div>
+                          </div>
+                        )}
+                        {element.projectDescription !== "" && (
+                          <div className="row">
+                            <div className="col-md experienceTr">
+                              Description: {element.projectDescription}
+                            </div>
+                          </div>
+                        )}
+                        <hr />
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <h3>Add Your Projects. </h3>
+                      <hr />
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>

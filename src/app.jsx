@@ -14,6 +14,7 @@ import Education from "./components/resume/education";
 import AddSummary from "./components/resume/addSummary";
 import AddWorkExperience from "./components/resume/addWorkExperience";
 import AddContact from "./components/resume/addContact";
+import PersonalProjects from "./components/resume/personalProjects";
 const App = () => {
   return (
     <div className="App">
@@ -44,6 +45,10 @@ const App = () => {
               element={<AddWorkExperience />}
             ></Route>
             <Route path="/addContact" element={<AddContact />}></Route>
+            <Route
+              path="/personalProjects"
+              element={<PersonalProjects />}
+            ></Route>
           </Routes>
         </BrowserRouter>
       </Provider>
